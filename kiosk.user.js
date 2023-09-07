@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.75
+// @version      0.76
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
 // @match        https://*/latest-results/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=elo.org.uk
-// @updateURL    https://www.elo.org.uk/results/kiosk.user.js
-// @downloadURL  https://www.elo.org.uk/results/kiosk.user.js
+// @updateURL    https://github.com/michael-77/O-Results-Kiosk/raw/main/kiosk.user.js
+// @downloadURL  https://github.com/michael-77/O-Results-Kiosk/raw/main/kiosk.user.js
 // @supportURL   https://github.com/michael-77/O-Results-Kiosk/
 // @grant        GM_addStyle
 // ==/UserScript==

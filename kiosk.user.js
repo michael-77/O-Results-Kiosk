@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.76
+// @version      0.77
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
@@ -108,28 +108,28 @@ let pageCSS=(``).toString();
 
 if (parsedHash.get("page") == 1) {
 pageCSS=(`
-.results-block:nth-child(n+12) {
+.results-block:nth-child(n+13) {
 	display: none !important;
 }
 `).toString();
 } else if (parsedHash.get("page") == 2) {
 pageCSS=(`
-.results-block:nth-child(-n+11),
-.results-block:nth-child(n+16) {
+.results-block:nth-child(-n+12),
+.results-block:nth-child(n+17) {
 	display: none !important;
 }
 `).toString();
 } else if (parsedHash.get("page") == 3) {
 pageCSS=(`
-.results-block:nth-child(-n+15),
-.results-block:nth-child(n+20) {
+.results-block:nth-child(-n+16),
+.results-block:nth-child(n+21) {
 	display: none !important;
 }
 `).toString();
 } else if (parsedHash.get("page") == 4) {
 pageCSS=(`
-.results-block:nth-child(-n+19),
-.results-block:nth-child(n+24) {
+.results-block:nth-child(-n+20),
+.results-block:nth-child(n+25) {
 	display: none !important;
 }
 `).toString();

@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.77
+// @version      0.78
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
 // @match        https://*/latest-results/*
+// @match        https://www.sportident.co.uk/results/SBOC/2023/JIRC2023Individual/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=elo.org.uk
 // @updateURL    https://github.com/michael-77/O-Results-Kiosk/raw/main/kiosk.user.js
 // @downloadURL  https://github.com/michael-77/O-Results-Kiosk/raw/main/kiosk.user.js
@@ -106,34 +107,28 @@ const parsedHash = new URLSearchParams(
 
 let pageCSS=(``).toString();
 
-if (parsedHash.get("page") == 1) {
+var $Start = parseInt(parsedHash.get("start"));
+var $End   = parseInt(parsedHash.get("end"));
+var $Page  = parseInt(parsedHash.get("page"))
+if ($Page) {
+    $Start = 4*($Page-1)+1;
+    $End   = 4*$Page;
+}
+if( jQuery("div.submenu").length ) {
+    $Start = $Start + 1;
+    $End = $End + 1;
+}
+
+console.log($Start);
+console.log($End);
+
 pageCSS=(`
-.results-block:nth-child(n+13) {
+.results-block:nth-child(-n+`+($Start+6).toString()+`),
+.results-block:nth-child(n+`+($End+8).toString()+`) {
 	display: none !important;
 }
 `).toString();
-} else if (parsedHash.get("page") == 2) {
-pageCSS=(`
-.results-block:nth-child(-n+12),
-.results-block:nth-child(n+17) {
-	display: none !important;
-}
-`).toString();
-} else if (parsedHash.get("page") == 3) {
-pageCSS=(`
-.results-block:nth-child(-n+16),
-.results-block:nth-child(n+21) {
-	display: none !important;
-}
-`).toString();
-} else if (parsedHash.get("page") == 4) {
-pageCSS=(`
-.results-block:nth-child(-n+20),
-.results-block:nth-child(n+25) {
-	display: none !important;
-}
-`).toString();
-}
+
 AddStyle(pageCSS);
 
 // if you change to page 2 reload

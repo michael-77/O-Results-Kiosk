@@ -6,7 +6,6 @@
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
 // @match        https://*/latest-results/*
-// @match        https://www.sportident.co.uk/results/SBOC/2023/JIRC2023Individual/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=elo.org.uk
 // @updateURL    https://github.com/michael-77/O-Results-Kiosk/raw/main/kiosk.user.js
 // @downloadURL  https://github.com/michael-77/O-Results-Kiosk/raw/main/kiosk.user.js

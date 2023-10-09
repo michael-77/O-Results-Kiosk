@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.78
+// @version      0.79
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
@@ -139,52 +139,40 @@ AddStyle(pageCSS);
 // if you change to page 2 reload
 onhashchange=location.reload.bind(location);
 
+var $CycleTime = parseInt(parsedHash.get("time"));
+if (!$CycleTime) {
+    $CycleTime = 33;
+}
+var $Cycles = parseInt(parsedHash.get("cycles"));
+if (!$Cycles) {
+    $Cycles = 4;
+}
+var $ScrollDownTime = $CycleTime / 2;
+var $ScrollUpTime = $CycleTime / 6;
+var $PauseTime = $CycleTime / 6;
+var $ReloadTime = $Cycles * $CycleTime;
+
 // Autoscroll
 setTimeout(function(){
-    jQuery("html, body").animate({ scrollTop: jQuery(document).height()-jQuery(window).height() }, 8000);
+    jQuery("html, body").animate({ scrollTop: jQuery(document).height()-jQuery(window).height() }, $ScrollDownTime*1000);
      setTimeout(function() {
          //window.location.reload();
-         jQuery('html, body').animate({scrollTop:0}, 3000);
-     },10000);
-}, 5000);
+         jQuery('html, body').animate({scrollTop:0}, $ScrollUpTime*1000);
+     },($ScrollDownTime + $PauseTime)*1000);
+}, $PauseTime*1000);
 
 setTimeout(function(){
-     // 4000 - it will take 4 secound in total from the top of the page to the bottom
-     jQuery("html, body").animate({ scrollTop: jQuery(document).height()-jQuery(window).height() }, 8000);
-     setTimeout(function() {
-         //window.location.reload();
-         jQuery('html, body').animate({scrollTop:0}, 3000);
-     },10000);
-},20000);
-
-setTimeout(function(){
-     // 4000 - it will take 4 secound in total from the top of the page to the bottom
-     jQuery("html, body").animate({ scrollTop: jQuery(document).height()-jQuery(window).height() }, 8000);
-     setTimeout(function() {
-         //window.location.reload();
-         jQuery('html, body').animate({scrollTop:0}, 3000);
-     },10000);
-},35000);
-
-setTimeout(function(){
-     // 4000 - it will take 4 secound in total from the top of the page to the bottom
-     jQuery("html, body").animate({ scrollTop: jQuery(document).height()-jQuery(window).height() }, 8000);
-     setTimeout(function() {
-         //window.location.reload();
-         jQuery('html, body').animate({scrollTop:0}, 3000);
-     },10000);
-},50000);
+    var ScrollTimer = window.setInterval(function(){
+        jQuery("html, body").animate({ scrollTop: jQuery(document).height()-jQuery(window).height() }, $ScrollDownTime*1000);
+        setTimeout(function() {
+            //window.location.reload();
+            jQuery('html, body').animate({scrollTop:0}, $ScrollUpTime*1000);
+        },($ScrollDownTime + $PauseTime)*1000);
+    }, ($ScrollDownTime+$ScrollUpTime+2*$PauseTime)*1000);
+}, $PauseTime*1000);
 
 setTimeout(function(){
     window.location.reload();
-}, 65000);
-
-/*
-jQuery('html, body').mouseover(function(e) {
-	jQuery(this).stop(true);
-}).mouseout(function() {
-	 jQuery(this).stop(false);
-});
-*/
+}, $ReloadTime*1000);
 
 })();

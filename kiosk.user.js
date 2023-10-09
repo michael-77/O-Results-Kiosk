@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.78
+// @version      0.76
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
@@ -109,10 +109,16 @@ let pageCSS=(``).toString();
 
 var $Start = parseInt(parsedHash.get("start"));
 var $End   = parseInt(parsedHash.get("end"));
-var $Page  = parseInt(parsedHash.get("page"))
+var $Page  = parseInt(parsedHash.get("page"));
+var $Courses  = parseInt(parsedHash.get("courses"));
+
+if (!$Courses) {
+    $Courses = 4;
+}
+
 if ($Page) {
-    $Start = 4*($Page-1)+1;
-    $End   = 4*$Page;
+    $Start = $Courses*($Page-1)+1;
+    $End   = $Courses*$Page;
 }
 if( jQuery("div.submenu").length ) {
     $Start = $Start + 1;

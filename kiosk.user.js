@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.90
+// @version      0.91
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*

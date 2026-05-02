@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SITiming Results
 // @namespace    https://tampermonkey.org
-// @version      0.80
+// @version      0.90
 // @description  Format SI Timing HTML results pages for a Kiosk Display - the tampermonkey extension needs to have local file access to run on local html files.
 // @author       Michael Atkinson
 // @match        file:///*/latest-results/*
@@ -19,6 +19,13 @@
 if (!jQuery('#showdetail0').is(':checked')) {
     jQuery('#showdetail0').click();
 }
+if (!jQuery('#showdetail8').is(':checked')) {
+    jQuery('#showdetail8').click();
+}
+if (!jQuery('#showdetail9').is(':checked')) {
+    jQuery('#showdetail9').click();
+}
+showAllTables();
 
 let myCSS=(`
 body {
@@ -65,6 +72,7 @@ body {
 .results-block {
 	display: inline-block !important;
 	padding-right: 30px;
+    vertical-align: top;
 }
 button.sortselected {
 	display: none;
